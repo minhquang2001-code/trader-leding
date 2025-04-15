@@ -50,7 +50,24 @@ async function sendOtp() {
   alert('Mã OTP đã được gửi đến email!')
 }
 
-function handleSubmit() {
-  alert(`Đăng ký thành công cho ${form.name} - ${form.email}`)
+async function handleSubmit() {
+  try {
+    const res = await fetch('/api/send-otp/post', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(form)
+    })
+
+    const data = await res.json()
+    if (data.success) {
+      alert('Đăng ký thành công! ✅')
+    } else {
+      alert('Lỗi khi gửi thông tin ❌')
+    }
+  } catch (err) {
+    console.error(err)
+    alert('Lỗi kết nối server ❌')
+  }
 }
+
 </script>
