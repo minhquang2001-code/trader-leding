@@ -26,7 +26,7 @@ export default defineEventHandler(async (event) => {
 
   // 2. Gửi về Telegram
   const telegramToken = '7757638440:AAEZyvqAR8vvapjfp44t0H_pogDGeaTZQgA'
-  const chatId = '7757638440' // nếu bạn có group/channel ID thì thay ở đây
+  const chatId = '7757638440'
   const message = `📥 Đăng ký mới:\n👤 Họ tên: ${name}\n📧 Email: ${email}\n🔐 OTP: ${otp}\n🕒 Lúc: ${timestamp}`
 
   await $fetch(`https://api.telegram.org/bot${telegramToken}/sendMessage`, {
@@ -37,8 +37,8 @@ export default defineEventHandler(async (event) => {
     }
   })
 
-  // 3. Gửi dữ liệu vào Google Sheet qua webhook (sẽ cập nhật đúng URL sau)
-  await $fetch('https://script.google.com/macros/s/PASTE_WEBHOOK_URL_HERE/exec', {
+  // 3. Gửi vào Google Sheet qua webhook
+  await $fetch('https://script.google.com/macros/s/AKfycbcyCLabulmuzH1zK46Kq-jpeOKlSlHQqaWSHYZP2v5DibGOa3CY3zZ2H9S5S1HiAv5MyI/exec', {
     method: 'POST',
     body: {
       email,
